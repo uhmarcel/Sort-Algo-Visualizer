@@ -1,17 +1,85 @@
-<mat-selection-list 
-    #listElement 
-    [multiple]="false"
-    (selectionChange)="handleSelectionChange($event)"
->
 
-    <mat-list-option 
-        *ngFor="let algorithm of sortingAlgorithms; index as i" 
-        [value]="algorithm" 
-        [selected]="i === selected"
+<mat-list>
+    <!-- Algorithms -->
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Algorithms
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-    >
-        {{algorithm.name}}
-    </mat-list-option>
+            <mat-selection-list 
+                #listElement 
+                [multiple]="false"
+                (selectionChange)="handleSelectionChange($event)"
+            >
+                <mat-list-option 
+                    *ngFor="let algorithm of sortingAlgorithms; index as i" 
+                    [value]="algorithm" 
+                    [selected]="i === selected"
+                    class="list-option"
+                >
+                    <div class="spaced-left">
+                        {{algorithm.name}}
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-</mat-selection-list>
+    <!-- Settings -->
+    <mat-accordion>
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Settings
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="settings-container">
+                <div class="settings-item">
+                    <div class="settings-item-label">
+                        <p>Speed:</p>
+                    </div>
+                    <mat-slider 
+                        color="primary"
+                        [min]="Constants.PLAYBACK_MIN_INTERVAL" 
+                        [max]="Constants.PLAYBACK_MAX_INTERVAL" 
+                        [step]="1" 
+                        [value]="Constants.PLAYBACK_MAX_INTERVAL - (configService.playbackSpeed$ | async)"
+                        (change)="handleSpeedRangeChange($event)">
+                    </mat-slider>
+                </div>
+
+                <div class="settings-item">
+                    <div class="settings-item-label">
+                        <p>Size:</p>
+                    </div>
+                    <mat-slider 
+                        color="primary"
+                        [min]="Constants.ARRAY_MIN_SIZE" 
+                        [max]="Constants.ARRAY_MAX_SIZE" 
+                        [value]="(configService.numberArray$ | async).length"
+                        [step]="1" 
+                        (change)="handleSizeRangeChange($event)">
+                    </mat-slider>
+                </div>
+
+                <div class="settings-item">
+                    <button 
+                        mat-stroked-button 
+                        color="primary"
+                        (click)="handleGenerateArray()"
+                    >
+                    <mat-icon>autorenew</mat-icon>
+                        Generate New Array
+                    </button>
+                </div>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</mat-list>
   

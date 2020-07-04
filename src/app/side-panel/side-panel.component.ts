@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import sortingAlgorithms from '../algorithms';
-import { DEFAULT_ALGORITHM } from '../constants';
+import * as Constants from '../constants';
 import { MatSelectionListChange } from '@angular/material/list';
 import { ConfigService } from '../config.service';
+import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
   selector: 'app-side-panel',
@@ -12,15 +13,31 @@ import { ConfigService } from '../config.service';
 export class SidePanelComponent {
 
   public readonly sortingAlgorithms = sortingAlgorithms;
-  public selected = DEFAULT_ALGORITHM;
+  public readonly Constants = Constants;
+  public selected = Constants.DEFAULT_ALGORITHM;
 
   constructor(
-    private readonly configService: ConfigService
+    public readonly configService: ConfigService
   ) {}
 
   handleSelectionChange(event: MatSelectionListChange) {
     const nextAlgorithm = event.option.value;
     this.configService.setSortingAlgorithm(nextAlgorithm);
   }
+
+  handleGenerateArray() {
+    this.configService.randomizeNumberArray();
+  }
+
+  handleSizeRangeChange(event: MatSliderChange) {
+    this.configService.randomizeNumberArrayWithSize(event.value);
+  }
+
+  handleSpeedRangeChange(event: MatSliderChange) {
+    const interval = Constants.PLAYBACK_MAX_INTERVAL - event.value;
+    this.configService.setPlaybackSpeed(interval);
+  }
+
+
 
 }

@@ -26,9 +26,17 @@ export class ConfigService {
     this.numberArray$.next(array);
   }
 
+  setPlaybackSpeed(interval: number) {
+    this.playbackSpeed$.next(interval);
+  }
+
   randomizeNumberArray() {
     const totalBars = Math.floor(Math.random() * (ARRAY_MAX_SIZE - ARRAY_MIN_SIZE + 1)) + ARRAY_MIN_SIZE;
-    const nextArray = Array.from({ length: totalBars }, () => (Math.floor(Math.random() * 101)));
+    this.randomizeNumberArrayWithSize(totalBars);
+  }
+
+  randomizeNumberArrayWithSize(size: number) {
+    const nextArray = Array.from({ length: size }, () => (Math.floor(Math.random() * 101)));
     this.setNumberArray(nextArray);
   }
 }

@@ -36,6 +36,7 @@ export class PlaybackService {
       }));
       this._playback = nextAlgorithm.sort(nextArray);
       this._values$.next(initialValues);
+      this._stopInterval$.next();
       this._step = 0;
     });
 
@@ -67,6 +68,10 @@ export class PlaybackService {
   }
 
   public start(): void {
+    this._stopInterval$.next();
+    if (this._step >= this._playback.length) {
+      this.reset();
+    }
     this._interval$.subscribe();
   }
 

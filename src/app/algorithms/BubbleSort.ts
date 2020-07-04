@@ -1,5 +1,5 @@
 import { AlgorithmRecorder } from './AlgorithmRecorder';
-import { SortingAlgorithm, Changes, Playback } from '../types';
+import { SortingAlgorithm, Playback } from '../types';
 
 export class BubbleSort extends AlgorithmRecorder implements SortingAlgorithm {
 

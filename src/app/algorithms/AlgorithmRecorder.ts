@@ -32,6 +32,13 @@ export class AlgorithmRecorder {
   }
 
   public recordComparison(first: number, second: number): void {
+    const n = this.projection.length;
+    if (first < 0 || first >= n || second < 0 || second >= n) {
+      if (first !== -1 || second !== -1) {
+        return;
+      }
+    }
+
     let changes = [];
     this.projection.forEach((element, index) => {
       if (index === first || index === second) {

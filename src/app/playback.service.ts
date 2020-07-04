@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { SortValue, Changes } from './types';
+import { SortValue, Playback } from './types';
 import { ConfigService } from './config.service';
-import { combineLatest } from 'rxjs';
-
-const MIN_VALUES = 30;
-const MAX_VALUES = 200;
+import { combineLatest, BehaviorSubject, Observable, interval, Subscription, Subject, merge } from 'rxjs';
+import { map, switchMap, takeUntil, tap, finalize } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaybackService {
 
-  public currentValues: SortValue[];
-  public playback: Changes[][];
-  public step = 0;
+  public values$: Observable<SortValue[]>;
+  public isPlaying$: Observable<boolean>;
+
+  private _playback: Playback;
+  private _step = 0;
+
+  private _interval$: Observable<number>;
+  private _stopInterval$ = new Subject();
+  private _values$ = new BehaviorSubject<SortValue[]>([]);
+  private _isPlaying$ = new BehaviorSubject<boolean>(false);
+  private _resetPlayback$ = new BehaviorSubject(undefined);
 
   constructor(
     private readonly configService: ConfigService
@@ -21,47 +27,88 @@ export class PlaybackService {
     combineLatest(
       this.configService.numberArray$,
       this.configService.sortingAlgorithm$,
-    ).subscribe(([nextArray, nextAlgorithm]) => {
-      this.currentValues = nextArray.map( element => ({
+      this._resetPlayback$,
+    )
+    .subscribe(([nextArray, nextAlgorithm]) => {
+      const initialValues = nextArray.map( element => ({
         value: element,
         compared: false,
       }));
-
-      this.playback = nextAlgorithm.sort(nextArray);
-      this.step = 0;
+      this._playback = nextAlgorithm.sort(nextArray);
+      this._values$.next(initialValues);
+      this._step = 0;
     });
+
+    this._interval$ = this.configService.playbackSpeed$.pipe(
+      tap(() => this._isPlaying$.next(true)),
+      switchMap(period => interval(period)),
+      takeUntil(this._stopInterval$),
+      tap(() => this.internalNext()),
+      finalize(() => this._isPlaying$.next(false))
+    );
+
+    this.values$ = this._values$.asObservable();
+    this.isPlaying$ = this._isPlaying$.asObservable();
   }
 
   public next(): void {
-    if (this.playback && this.step < this.playback.length) {
-      this.playback[this.step].forEach(delta => {
-        if (delta.value) {
-          this.currentValues[delta.index].value += delta.value;
-        }
-        if (delta.compared !== null) {
-          this.currentValues[delta.index].compared = delta.compared; 
-        }
-      });
-      this.step++;
-    }
+    this.pause();
+    this.internalNext();
   }
 
   public prev(): void {
-    if (this.playback && this.step > 0) {
-      this.playback[this.step - 1].forEach(delta => {
+    this.pause();
+    this.internalPrev();
+  }
+
+  public reset(): void {
+    this.pause();
+    this._resetPlayback$.next(undefined);
+  }
+
+  public start(): void {
+    this._interval$.subscribe();
+  }
+
+  public pause(): void {
+    this._stopInterval$.next();
+  }
+
+  private internalNext() {
+    if (this._playback && this._step < this._playback.length) {
+      const nextValues = this._values$.getValue();
+
+      this._playback[this._step].forEach(delta => {
         if (delta.value) {
-          this.currentValues[delta.index].value -= delta.value;
+          nextValues[delta.index].value += delta.value;
         }
         if (delta.compared !== null) {
-          this.currentValues[delta.index].compared = !delta.compared;
+          nextValues[delta.index].compared = delta.compared; 
         }
       });
-      this.step--;
+      this._step++;
+
+      this._values$.next(nextValues);
+    } else {
+      this._stopInterval$.next();
     }
   }
 
-  public getNumberArray(): number[] {
-    return this.currentValues.map(element => element.value);
-  }
+  private internalPrev(): void {
+    if (this._playback && this._step > 0) {
+      const prevValues = this._values$.getValue();
 
+      this._playback[this._step - 1].forEach(delta => {
+        if (delta.value) {
+          prevValues[delta.index].value -= delta.value;
+        }
+        if (delta.compared !== null) {
+          prevValues[delta.index].compared = !delta.compared;
+        }
+      });
+      this._step--;
+
+      this._values$.next(prevValues);
+    }
+  }
 }

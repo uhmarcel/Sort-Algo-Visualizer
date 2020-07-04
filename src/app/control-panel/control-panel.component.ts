@@ -1,20 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { PlaybackService } from '../playback.service';
 
 @Component({
   selector: 'app-control-panel',
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss']
 })
-export class ControlPanelComponent implements OnInit {
+export class ControlPanelComponent {
 
-  playIcon: boolean = true;
+  public isPlaying: boolean = false;
 
-  constructor() {}
+  constructor(
+    private readonly playbackService: PlaybackService
+  ) {
+    this.playbackService.isPlaying$.subscribe(latest => (this.isPlaying = latest))
+  }
 
-  ngOnInit(): void {}
+  toggleStart() {
+    if (!this.isPlaying) {
+      this.playbackService.start();
+    } else {
+      this.playbackService.pause();
+    }
+  }
 
-  togglePlayButton() {
-    this.playIcon = !this.playIcon
+  handleNext() {
+    this.playbackService.next();
+  }
+
+  handlePrevious() {
+    this.playbackService.prev();
+  }
+
+  handleReset() {
+    this.playbackService.reset();
   }
 
 }

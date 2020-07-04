@@ -2,27 +2,29 @@
     <button 
         class="control-panel-button"
         mat-mini-fab 
-        color="{{ playIcon ? 'secondary' : 'primary' }}" 
-        aria-label="Example icon button with a delete icon"
-        (click)="togglePlayButton()"
+        color="{{ isPlaying ? 'primary' : 'secondary' }}" 
+        aria-label="Start or stop sorting algorithm"
+        (click)="toggleStart()"
     >
-        <mat-icon>{{ playIcon ? "play_arrow" : "stop" }}</mat-icon>
+        <mat-icon>{{ isPlaying ? "pause" : "play_arrow" }}</mat-icon>
     </button>
 
     <button 
         class="control-panel-button"
         mat-mini-fab 
         color="secondary" 
-        aria-label="Example icon button with a delete icon"
+        aria-label="Reset array"
+        (click)="handleReset()"
     >
-        <mat-icon>pause</mat-icon>
+        <mat-icon>stop</mat-icon>
     </button>
 
     <button 
         class="control-panel-button"
         mat-mini-fab 
         color="secondary" 
-        aria-label="Example icon button with a delete icon"
+        aria-label="Go back one step"
+        (click)="handlePrevious()"
     >
         <mat-icon>skip_previous</mat-icon>
     </button>
@@ -31,7 +33,8 @@
         class="control-panel-button"
         mat-mini-fab 
         color="secondary" 
-        aria-label="Example icon button with a delete icon"
+        aria-label="Advance one step"
+        (click)="handleNext()"
     >
         <mat-icon>skip_next</mat-icon>
     </button>

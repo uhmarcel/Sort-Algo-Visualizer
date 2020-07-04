@@ -1,35 +1,29 @@
 import { AlgorithmRecorder } from './AlgorithmRecorder';
-import { RecordableSort } from '../types';
+import { SortingAlgorithm, Changes, Playback } from '../types';
 
-export class QuickSort extends AlgorithmRecorder implements RecordableSort {
+export class QuickSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Quick Sort";
 
-    public sort(array: number[]) { // TODO: make startRecording to return 
-        this.startRecording(array);
-        this.quickSort(array, 0, array.length - 1);
-        return this.dumpPlayback();
+    public sort(array: number[]): Playback {
+        return this.recordAlgorithm(array, (state: number[]) => {
+            this.quickSort(state, 0, state.length - 1);
+        });
     }
 
     private quickSort(array: number[], left: number, right: number) {
-        if (array.length > 1) {
-            let pivot = this.partition(array, left, right); 
+        this.recordComparison(left, right);
+        if (left < right) {
+            let pivot = this.partition(array, left, right);
     
-            this.recordComparison(left, pivot - 1);
-            if (left < pivot - 1) { 
-                this.quickSort(array, left, pivot - 1);
-            }
-            this.recordComparison(pivot, right);
-            if (pivot < right) { 
-                this.quickSort(array, pivot, right);
-            }
+            this.quickSort(array, left, pivot - 1);
+            this.quickSort(array, pivot + 1, right);
         }
-        return array;
     }
 
     private swap(array: number[], left: number, right: number) {
         let temp = array[left];
-        array[left] = array[left];
+        array[left] = array[right];
         array[right] = temp;
         this.recordChanges(array);
     }

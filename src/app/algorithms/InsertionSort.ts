@@ -1,14 +1,14 @@
 import { AlgorithmRecorder } from './AlgorithmRecorder';
-import { RecordableSort } from '../types';
+import { SortingAlgorithm, Playback } from '../types';
 
-export class InsertionSort extends AlgorithmRecorder implements RecordableSort {
+export class InsertionSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Insertion Sort";
 
-    public sort(array: number[])  {
-        this.startRecording(array);
-        this.insertionSort(array);
-        return this.dumpPlayback();
+    public sort(array: number[]): Playback {
+        return this.recordAlgorithm(array, (state) => {
+            this.insertionSort(state);
+        });
     }
 
     private insertionSort(array: number[]) {

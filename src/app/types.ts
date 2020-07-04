@@ -9,7 +9,9 @@ export interface Changes {
     compared: boolean;
 };
 
-export interface RecordableSort {
+export interface SortingAlgorithm {
     name: string;
     sort: Function;
 }
+
+export type Playback = Changes[][];

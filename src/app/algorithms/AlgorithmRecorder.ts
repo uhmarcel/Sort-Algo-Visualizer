@@ -1,21 +1,19 @@
-import { Injectable } from '@angular/core';
-import { SortValue, Changes } from './types';
+import { SortValue, Changes } from '../types';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RecordService {
+export class AlgorithmRecorder {
 
   private projection: SortValue[] = null;
   private playback: Changes[][] = null;
   constructor() {}
 
-  public startRecording(initialState: number[]) {
+  public recordAlgorithm(initialState: number[], recordFunction: Function) {
     this.projection = initialState.map(element => ({
       value: element,
       compared: false
     })); 
     this.playback = [];
+    recordFunction(initialState.slice());
+    return this.dumpPlayback();
   }
 
   public recordChanges(array: number[]): void {
@@ -51,7 +49,7 @@ export class RecordService {
     this.playback.push(changes);
   }
 
-  public dumpPlayback(): Changes[][] {
+  private dumpPlayback(): Changes[][] {
     this.recordComparison(-1, -1);
     return this.playback;
   }

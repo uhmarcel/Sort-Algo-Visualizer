@@ -1,1 +1,26 @@
-<app-main></app-main>
+<div class="main-container"> 
+    <app-nav-bar 
+        (onToggleMenu)="sidePanel.toggle()"
+    ></app-nav-bar>
+
+    <mat-sidenav-container style="flex: 1;">
+            
+        <mat-sidenav 
+            #sidePanel 
+            class="app-side" 
+            mode="side" 
+            opened
+        >
+            <app-side-panel></app-side-panel>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="main-content">
+
+            <app-control-panel></app-control-panel>
+
+            <app-graph class="main-graph"></app-graph>
+
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>

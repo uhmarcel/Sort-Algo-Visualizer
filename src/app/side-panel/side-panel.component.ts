@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import sortingAlgorithms from '../algorithms';
+import { DEFAULT_ALGORITHM } from '../constants';
+import { MatSelectionListChange } from '@angular/material/list';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-side-panel',
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.scss']
 })
-export class SidePanelComponent implements OnInit {
-  sortingAlgorithms = [
-    'Bubble Sort',
-    'Selection Sort',
-    'Insertion Sort',
-    'Merge Sort',
-    'Quick Sort',
-    'Heap Sort',
-    'Bucket Sort',
-    'Shell Sort',
-    'Radix Sort',
-  ];
+export class SidePanelComponent {
 
-  constructor() { }
+  public readonly sortingAlgorithms = sortingAlgorithms;
+  public selected = DEFAULT_ALGORITHM;
 
-  ngOnInit(): void {
+  constructor(
+    private readonly configService: ConfigService
+  ) {}
+
+  handleSelectionChange(event: MatSelectionListChange) {
+    const nextAlgorithm = event.option.value;
+    this.configService.setSortingAlgorithm(nextAlgorithm);
   }
 
 }

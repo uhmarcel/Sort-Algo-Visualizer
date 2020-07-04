@@ -32,14 +32,13 @@ export class QuickSort extends AlgorithmRecorder implements SortingAlgorithm {
         let pivot = array[right];
         let i = left - 1;  
  
-        this.recordComparison(left, right - 1);
         for (let j = left; j <= right - 1; j++) {
+            this.recordComparison(j, pivot);
             if (array[j] < pivot)
             {
                 i++;  
                 this.swap(array, i, j);
             }
-            this.recordComparison(j, right - 1);
         }
         this.swap(array, i + 1, right);
         return (i + 1);

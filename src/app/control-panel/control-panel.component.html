@@ -1,0 +1,41 @@
+<div class="control-panel-container">
+    <button 
+        class="control-panel-button"
+        mat-mini-fab 
+        color="{{ playIcon ? 'secondary' : 'primary' }}" 
+        aria-label="Example icon button with a delete icon"
+        (click)="togglePlayButton()"
+    >
+        <mat-icon>{{ playIcon ? "play_arrow" : "stop" }}</mat-icon>
+    </button>
+
+    <button 
+        class="control-panel-button"
+        mat-mini-fab 
+        color="secondary" 
+        aria-label="Example icon button with a delete icon"
+    >
+        <mat-icon>pause</mat-icon>
+    </button>
+
+    <button 
+        class="control-panel-button"
+        mat-mini-fab 
+        color="secondary" 
+        aria-label="Example icon button with a delete icon"
+    >
+        <mat-icon>skip_previous</mat-icon>
+    </button>
+
+    <button 
+        class="control-panel-button"
+        mat-mini-fab 
+        color="secondary" 
+        aria-label="Example icon button with a delete icon"
+    >
+        <mat-icon>skip_next</mat-icon>
+    </button>
+
+    <!-- <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider> -->
+
+</div>

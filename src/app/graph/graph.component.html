@@ -1,0 +1,16 @@
+<div id='display-container'>
+    <ul>
+        <li *ngFor="let element of (playbackService.sortValues$ | async)">
+            <div  
+                [ngStyle]="{ 'height': element.value + '.%' }"
+                [ngClass]="{ 'highlight': element.compared }"
+                class="bar"></div
+            >
+        </li>
+    </ul>
+    <!-- <button (click)="refresh()">Generate</button>
+    <button (click)="playbackService.prev()">Previous</button>
+    <button (click)="playbackService.next()">Next</button>
+    <button (click)="start()">Start</button>
+    <button (click)="stop()">Stop</button> -->
+</div>

@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { RecordableSort } from './types';
+import sortingAlgorithms from './algorithms';
+import { DEFAULT_ALGORITHM, DEFAULT_PLAYBACK_SPEED, ARRAY_MIN_SIZE, ARRAY_MAX_SIZE } from './constants';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ConfigService {
+
+  public sortingAlgorithm$ = new BehaviorSubject<RecordableSort>(sortingAlgorithms[DEFAULT_ALGORITHM]);
+  public playbackSpeed$ = new BehaviorSubject<number>(DEFAULT_PLAYBACK_SPEED);
+  public numberArray$ = new BehaviorSubject<number[]>([]);
+
+  constructor() {
+    this.randomizeNumberArray();
+  }
+
+  setSortingAlgorithm(algorithm: RecordableSort) {
+    this.sortingAlgorithm$.next(algorithm);
+  }
+
+  setNumberArray(array: number[]) {
+    this.numberArray$.next(array);
+  }
+
+  randomizeNumberArray() {
+    const totalBars = Math.floor(Math.random() * (ARRAY_MAX_SIZE - ARRAY_MIN_SIZE + 1)) + ARRAY_MIN_SIZE;
+    const nextArray = Array.from({ length: totalBars }, () => (Math.floor(Math.random() * 101)));
+    this.setNumberArray(nextArray);
+  }
+}

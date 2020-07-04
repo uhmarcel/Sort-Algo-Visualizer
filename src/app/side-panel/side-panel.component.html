@@ -1,0 +1,6 @@
+<mat-selection-list #listElement [multiple]="false">
+    <mat-list-option *ngFor="let algorithm of sortingAlgorithms" [value]="algorithm">
+        {{algorithm}}
+    </mat-list-option>
+</mat-selection-list>
+  

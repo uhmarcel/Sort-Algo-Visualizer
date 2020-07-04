@@ -1,0 +1,10 @@
+.control-panel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .control-panel-button {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}

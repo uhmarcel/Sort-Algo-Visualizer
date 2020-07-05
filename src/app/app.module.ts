@@ -16,7 +16,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     SidePanelComponent,
     GraphComponent,
     ControlPanelComponent,
-    NavBarComponent
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,4 +26,4 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

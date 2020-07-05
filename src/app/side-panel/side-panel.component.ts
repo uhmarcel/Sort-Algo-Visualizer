@@ -14,7 +14,6 @@ export class SidePanelComponent {
 
   public readonly sortingAlgorithms = sortingAlgorithms;
   public readonly Constants = Constants;
-  public selected = Constants.DEFAULT_ALGORITHM;
 
   constructor(
     public readonly configService: ConfigService

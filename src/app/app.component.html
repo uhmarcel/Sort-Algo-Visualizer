@@ -7,8 +7,8 @@
             
         <mat-sidenav 
             #sidePanel 
-            class="app-side" 
-            mode="side" 
+            class="main-side" 
+            [mode]="(breakpointService.isMobileView$ | async) ? 'over' : 'side'" 
             opened
         >
             <app-side-panel></app-side-panel>

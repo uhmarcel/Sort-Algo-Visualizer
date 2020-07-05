@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BreakpointService } from './breakpoint.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'sort-algo-visualizer';
+  title = 'Sort Algo Visualizer';
+
+  constructor(
+    public readonly breakpointService: BreakpointService
+  ) {}
 }

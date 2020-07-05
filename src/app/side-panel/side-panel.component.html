@@ -2,7 +2,7 @@
 <mat-list>
     <!-- Algorithms -->
     <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel expanded="true">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Algorithms
@@ -15,9 +15,9 @@
                 (selectionChange)="handleSelectionChange($event)"
             >
                 <mat-list-option 
-                    *ngFor="let algorithm of sortingAlgorithms; index as i" 
+                    *ngFor="let algorithm of sortingAlgorithms" 
                     [value]="algorithm" 
-                    [selected]="i === selected"
+                    [ngClass]="{ selected: algorithm.name === (configService.sortingAlgorithm$ | async).name }"
                     class="list-option"
                 >
                     <div class="spaced-left">

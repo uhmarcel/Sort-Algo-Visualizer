@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SortingAlgorithm } from './types';
 import sortingAlgorithms from './algorithms';
-import { DEFAULT_ALGORITHM, DEFAULT_PLAYBACK_SPEED, ARRAY_MIN_SIZE, ARRAY_MAX_SIZE } from './constants';
+import { 
+  DEFAULT_ALGORITHM, 
+  DEFAULT_PLAYBACK_SPEED, 
+  ARRAY_MIN_SIZE, 
+  ARRAY_MAX_SIZE,
+  ARRAY_INIT_MIN_SIZE, 
+  ARRAY_INIT_MAX_SIZE 
+} from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +22,7 @@ export class ConfigService {
   public numberArray$ = new BehaviorSubject<number[]>([]);
 
   constructor() {
-    this.randomizeNumberArray();
+    this.randomizeNumberArrayFirstTime();
   }
 
   setSortingAlgorithm(algorithm: SortingAlgorithm) {
@@ -32,6 +39,11 @@ export class ConfigService {
 
   randomizeNumberArray() {
     const totalBars = Math.floor(Math.random() * (ARRAY_MAX_SIZE - ARRAY_MIN_SIZE + 1)) + ARRAY_MIN_SIZE;
+    this.randomizeNumberArrayWithSize(totalBars);
+  }
+  
+  randomizeNumberArrayFirstTime() {
+    const totalBars = Math.floor(Math.random() * (ARRAY_INIT_MAX_SIZE - ARRAY_INIT_MIN_SIZE + 1)) + ARRAY_INIT_MIN_SIZE;
     this.randomizeNumberArrayWithSize(totalBars);
   }
 

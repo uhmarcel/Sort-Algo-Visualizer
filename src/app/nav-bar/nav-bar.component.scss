@@ -1,6 +1,23 @@
 .nav {
-    .title {
-        margin-left: 10px;
 
+    .spacer {
+        flex: 1 1 auto;
     }
+
+    .active-algorithm {
+        font-size: 18px;
+    }
+
+    .spacing-bar {
+        display: inline-block;
+        height: 30%;
+        width: 2px;
+        margin: 0 7px 0 15px;
+        background-color: #ddd;
+    }
+
+    .title {
+        margin-left: 5px;
+    }
+
 }

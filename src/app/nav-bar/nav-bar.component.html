@@ -1,8 +1,19 @@
 <mat-toolbar color="primary" class="nav">
+
     <button mat-icon-button (click)="handleToggleMenu()">
         <mat-icon>
             menu
         </mat-icon>
     </button>
-    <h1 class="title">Sorting Algorithm Visualizer</h1>
+
+    <span class="title"> 
+        {{ Constants.FULL_TITLE }} 
+    </span>
+
+    <span class="spacer"></span>
+
+    <button mat-icon-button>
+        <mat-icon svgIcon="gh-icon" (click)="openGithubPage()"></mat-icon>
+    </button>
+
 </mat-toolbar>

@@ -9,6 +9,7 @@ import { SidePanelComponent } from './side-panel/side-panel.component';
 import { GraphComponent } from './graph/graph.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

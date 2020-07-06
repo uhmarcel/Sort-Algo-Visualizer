@@ -10,6 +10,8 @@ import { GraphSizeComponent } from './graph-size/graph-size.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GraphColorComponent } from './graph-color/graph-color.component';
+import { ColorPipe } from './graph-color/color.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     GraphSizeComponent,
     ControlPanelComponent,
     NavBarComponent,
+    GraphColorComponent,
+    ColorPipe,
   ],
   imports: [
     BrowserModule,

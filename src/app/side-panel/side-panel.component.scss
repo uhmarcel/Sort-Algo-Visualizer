@@ -26,31 +26,41 @@
 }
 
 .settings-container {
-    padding: 10px 24px;
+    padding: 10px 24px 0 24px;
     border-top: 1px solid #f6f6f6;
     border-bottom: 1px solid #f6f6f6;
 
-    .settings-item {
+    .settings-item-container {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         height: 50px;
-        padding-bottom: 8px;
 
-        .settings-item-label {
+        .settings-item {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
 
-            p {
-                width: 55px;
-                margin: 0;
-                text-align: end;
+            .settings-item-label {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                p {
+                    width: 55px;
+                    margin: 0;
+                    text-align: end;
+                }
             }
+
+            button {
+                width: 100%;
+                height: 100%;
+            }
+
         }
 
-        button {
-            width: 100%;
-            height: 80%;
+        .centered {
+            margin: auto;
         }
     }
 

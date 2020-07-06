@@ -1,0 +1,11 @@
+<div id='display-container'>
+    <ul>
+        <li *ngFor="let element of (playbackService.values$ | async)" [ngClass]="{ isCrowded: isCrowded }">
+            <div  
+                [ngStyle]="{ 'background-color': (element.value | color), 'height': element.value + '%' }"
+                [ngClass]="{ 'highlight': element.compared }"
+                class="bar"></div
+            >
+        </li>
+    </ul>
+</div>

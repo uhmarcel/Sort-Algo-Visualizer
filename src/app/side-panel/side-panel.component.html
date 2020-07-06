@@ -38,43 +38,61 @@
             </mat-expansion-panel-header>
 
             <div class="settings-container">
-                <div class="settings-item">
-                    <div class="settings-item-label">
-                        <p>Speed:</p>
+                <div class="settings-item-container">
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <p>Speed:</p>
+                        </div>
+                        <mat-slider 
+                            color="primary"
+                            [min]="Constants.PLAYBACK_MIN_INTERVAL" 
+                            [max]="Constants.PLAYBACK_MAX_INTERVAL" 
+                            [step]="1" 
+                            [value]="Constants.PLAYBACK_MAX_INTERVAL - (configService.playbackSpeed$ | async)"
+                            (change)="handleSpeedRangeChange($event)">
+                        </mat-slider>
                     </div>
-                    <mat-slider 
-                        color="primary"
-                        [min]="Constants.PLAYBACK_MIN_INTERVAL" 
-                        [max]="Constants.PLAYBACK_MAX_INTERVAL" 
-                        [step]="1" 
-                        [value]="Constants.PLAYBACK_MAX_INTERVAL - (configService.playbackSpeed$ | async)"
-                        (change)="handleSpeedRangeChange($event)">
-                    </mat-slider>
                 </div>
 
-                <div class="settings-item">
-                    <div class="settings-item-label">
-                        <p>Size:</p>
+                <div class="settings-item-container">
+                    <div class="settings-item">
+                        <div class="settings-item-label">
+                            <p>Size:</p>
+                        </div>
+                        <mat-slider 
+                            color="primary"
+                            [min]="Constants.ARRAY_MIN_SIZE" 
+                            [max]="Constants.ARRAY_MAX_SIZE" 
+                            [value]="(configService.numberArray$ | async).length"
+                            [step]="1" 
+                            (change)="handleSizeRangeChange($event)">
+                        </mat-slider>
                     </div>
-                    <mat-slider 
-                        color="primary"
-                        [min]="Constants.ARRAY_MIN_SIZE" 
-                        [max]="Constants.ARRAY_MAX_SIZE" 
-                        [value]="(configService.numberArray$ | async).length"
-                        [step]="1" 
-                        (change)="handleSizeRangeChange($event)">
-                    </mat-slider>
                 </div>
 
-                <div class="settings-item">
-                    <button 
-                        mat-stroked-button 
-                        color="primary"
-                        (click)="handleGenerateArray()"
-                    >
-                    <mat-icon>autorenew</mat-icon>
-                        Generate New Array
-                    </button>
+                <div class="settings-item-container">
+                    <div class="settings-item">
+                        <button 
+                            mat-stroked-button 
+                            color="primary"
+                            (click)="handleGenerateArray()"
+                        >
+                        <mat-icon>autorenew</mat-icon>
+                            Generate New Array
+                        </button>
+                    </div>
+                </div>
+
+                
+                <div class="settings-item-container">
+                    <div class="settings-item centered">
+                        <mat-checkbox
+                            class="example-margin"
+                            checked="true"
+                            color="primary">
+                        Colorized array
+                        </mat-checkbox>
+                    </div>
                 </div>
             </div>
 

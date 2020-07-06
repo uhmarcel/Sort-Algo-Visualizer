@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SortingAlgorithm } from './types';
 import sortingAlgorithms from './algorithms';
 import { 
@@ -17,24 +17,31 @@ import {
 
 export class ConfigService {
 
-  public sortingAlgorithm$ = new BehaviorSubject<SortingAlgorithm>(sortingAlgorithms[DEFAULT_ALGORITHM]);
-  public playbackSpeed$ = new BehaviorSubject<number>(DEFAULT_PLAYBACK_SPEED);
-  public numberArray$ = new BehaviorSubject<number[]>([]);
+  public sortingAlgorithm$: Observable<SortingAlgorithm>; 
+  public playbackSpeed$: Observable<number>;
+  public numberArray$: Observable<number[]>;
+
+  private _sortingAlgorithm$ = new BehaviorSubject<SortingAlgorithm>(sortingAlgorithms[DEFAULT_ALGORITHM]);
+  private _playbackSpeed$ = new BehaviorSubject<number>(DEFAULT_PLAYBACK_SPEED);
+  private _numberArray$ = new BehaviorSubject<number[]>([]);
 
   constructor() {
+    this.sortingAlgorithm$ = this._sortingAlgorithm$.asObservable();
+    this.playbackSpeed$ = this._playbackSpeed$.asObservable();
+    this.numberArray$ = this._numberArray$.asObservable();
     this.randomizeNumberArrayFirstTime();
   }
 
   setSortingAlgorithm(algorithm: SortingAlgorithm) {
-    this.sortingAlgorithm$.next(algorithm);
+    this._sortingAlgorithm$.next(algorithm);
   }
 
   setNumberArray(array: number[]) {
-    this.numberArray$.next(array);
+    this._numberArray$.next(array);
   }
 
   setPlaybackSpeed(interval: number) {
-    this.playbackSpeed$.next(interval);
+    this._playbackSpeed$.next(interval);
   }
 
   randomizeNumberArray() {

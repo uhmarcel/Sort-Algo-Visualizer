@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
-import { GraphComponent } from './graph/graph.component';
+import { GraphSizeComponent } from './graph-size/graph-size.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     SidePanelComponent,
-    GraphComponent,
+    GraphSizeComponent,
     ControlPanelComponent,
     NavBarComponent,
   ],

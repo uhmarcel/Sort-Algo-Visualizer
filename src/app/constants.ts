@@ -1,4 +1,5 @@
 export const GITHUB_PAGE_URL = "https://github.com/uhmarcel";
+export const BASE_HREF = ''; // '/Sort-Algo-Visualizer/';
 export const FULL_TITLE = "Sorting Algorithm Visualizer";
 export const SHORT_TITLE = "Sort Algo Visualizer";
 export const DEFAULT_ALGORITHM = 0;

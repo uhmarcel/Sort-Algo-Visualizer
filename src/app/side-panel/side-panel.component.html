@@ -88,9 +88,10 @@
                     <div class="settings-item centered">
                         <mat-checkbox
                             class="example-margin"
-                            checked="true"
-                            color="primary">
-                        Colorized array
+                            [checked]="configService.isColorized$ | async"
+                            color="primary"
+                            (change)="handleColorizedChange($event)">
+                        Colorized Array
                         </mat-checkbox>
                     </div>
                 </div>

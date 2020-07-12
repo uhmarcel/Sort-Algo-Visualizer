@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { PlaybackService } from '../playback.service';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { ConfigService } from '../config.service';
 import { BreakpointService } from '../breakpoint.service';
-import { map, filter, distinctUntilChanged, throttle, tap } from 'rxjs/operators';
+import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-graph-color',
@@ -13,6 +13,7 @@ import { map, filter, distinctUntilChanged, throttle, tap } from 'rxjs/operators
 export class GraphColorComponent {
 
   public isCrowded = false;
+  public isColorized = false;
 
   constructor(
     public readonly playbackService: PlaybackService,
@@ -28,10 +29,12 @@ export class GraphColorComponent {
     )
     .pipe(
       map(([isMobileView, hasManyValues]) => isMobileView && hasManyValues),
-      distinctUntilChanged(),
-      tap(console.log)
+      distinctUntilChanged()
     )
     .subscribe(crowded => this.isCrowded = crowded);
+
+    configService.isColorized$
+    .subscribe(colorized => this.isColorized = colorized);
   }
 
 

@@ -20,15 +20,18 @@ export class ConfigService {
   public sortingAlgorithm$: Observable<SortingAlgorithm>; 
   public playbackSpeed$: Observable<number>;
   public numberArray$: Observable<number[]>;
+  public isColorized$: Observable<boolean>;
 
   private _sortingAlgorithm$ = new BehaviorSubject<SortingAlgorithm>(sortingAlgorithms[DEFAULT_ALGORITHM]);
   private _playbackSpeed$ = new BehaviorSubject<number>(DEFAULT_PLAYBACK_SPEED);
   private _numberArray$ = new BehaviorSubject<number[]>([]);
+  private _isColorized$ = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.sortingAlgorithm$ = this._sortingAlgorithm$.asObservable();
     this.playbackSpeed$ = this._playbackSpeed$.asObservable();
     this.numberArray$ = this._numberArray$.asObservable();
+    this.isColorized$ = this._isColorized$.asObservable();
     this.randomizeNumberArrayFirstTime();
   }
 
@@ -42,6 +45,10 @@ export class ConfigService {
 
   setPlaybackSpeed(interval: number) {
     this._playbackSpeed$.next(interval);
+  }
+
+  setIsColorized(colorized: boolean) {
+    this._isColorized$.next(colorized);
   }
 
   randomizeNumberArray() {

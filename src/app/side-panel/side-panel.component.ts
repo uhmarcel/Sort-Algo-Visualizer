@@ -4,6 +4,7 @@ import * as Constants from '../constants';
 import { MatSelectionListChange } from '@angular/material/list';
 import { ConfigService } from '../config.service';
 import { MatSliderChange } from '@angular/material/slider';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-side-panel',
@@ -35,6 +36,10 @@ export class SidePanelComponent {
   handleSpeedRangeChange(event: MatSliderChange) {
     const interval = Constants.PLAYBACK_MAX_INTERVAL - event.value;
     this.configService.setPlaybackSpeed(interval);
+  }
+
+  handleColorizedChange(event: MatCheckboxChange) {
+    this.configService.setIsColorized(event.checked);
   }
 
 

@@ -20,8 +20,13 @@
                     [ngClass]="{ selected: algorithm.name === (configService.sortingAlgorithm$ | async).name }"
                     class="list-option"
                 >
-                    <div class="spaced-left">
-                        {{algorithm.name}}
+                    <div class="list-item-algo-container">
+                        <div class="list-item-algo-container-name">
+                            {{ algorithm.name }}
+                        </div>
+                        <!-- <div class="list-item-algo-container-complexity">
+                            <ng-katex [equation]="algorithm.complexity"></ng-katex>
+                        </div> -->
                     </div>
                 </mat-list-option>
             </mat-selection-list>
@@ -91,7 +96,7 @@
                             [checked]="configService.isColorized$ | async"
                             color="primary"
                             (change)="handleColorizedChange($event)">
-                        Colorized Array
+                        Colorized array
                         </mat-checkbox>
                     </div>
                 </div>

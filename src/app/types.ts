@@ -11,6 +11,7 @@ export interface Changes {
 
 export interface SortingAlgorithm {
     name: string;
+    // complexity: string;
     sort: Function;
 }
 

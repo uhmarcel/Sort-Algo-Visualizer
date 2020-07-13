@@ -21,8 +21,18 @@
 
 }
 
-.spaced-left {
-    padding-left: 30px !important;
+.list-item-algo-container {
+    padding-left: 20px !important;
+    margin-right: -16px !important;
+    display: flex;
+    justify-content: space-between;
+
+    // .list-item-algo-container-name {}
+
+    .list-item-algo-container-complexity {
+        font-size: 10px;
+        color: #999;
+    }
 }
 
 .settings-container {

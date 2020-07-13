@@ -4,6 +4,7 @@ import { SortingAlgorithm, Playback } from '../types';
 export class RadixSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Radix Sort";
+    public complexity = "O(nk)"; 
 
     private RADIX_BASE = 2;
 

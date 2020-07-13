@@ -4,6 +4,7 @@ import { SortingAlgorithm, Playback } from '../types';
 export class BubbleSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Bubble Sort";
+    public complexity = "O(n^2)"; 
 
     public sort(array: number[]): Playback {
         return this.recordAlgorithm(array, (state: number[]) => {

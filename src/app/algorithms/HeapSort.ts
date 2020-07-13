@@ -4,6 +4,7 @@ import { SortingAlgorithm, Playback } from '../types';
 export class HeapSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Heap Sort";
+    public complexity = "O(n logn)"; 
 
     public sort(array: number[]): Playback {
         return this.recordAlgorithm(array, (state: number[]) => {

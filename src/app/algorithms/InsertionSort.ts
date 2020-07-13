@@ -4,6 +4,7 @@ import { SortingAlgorithm, Playback } from '../types';
 export class InsertionSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Insertion Sort";
+    public complexity = "O(n^2)"; 
 
     public sort(array: number[]): Playback {
         return this.recordAlgorithm(array, (state) => {

@@ -4,6 +4,7 @@ import { SortingAlgorithm, Playback } from '../types';
 export class MergeSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Merge Sort";
+    public complexity = "O(n logn)"; 
 
     public sort(array: number[]): Playback {
         return this.recordAlgorithm(array, (state: number[]) => {

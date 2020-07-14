@@ -1,13 +1,10 @@
 import { AlgorithmRecorder } from './AlgorithmRecorder';
 import { SortingAlgorithm, Playback } from '../types';
 
-const HARDCODED_ITERATION_LIMIT = 1000;
-
 export class BogoSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     public name = "Bogo Sort";
     public complexity = "O(n*n!)"; 
-    
 
     public sort(array: number[]): Playback {
         return this.recordAlgorithm(array, (state: number[]) => {
@@ -17,7 +14,7 @@ export class BogoSort extends AlgorithmRecorder implements SortingAlgorithm {
 
     private bogoSort(array: number[]) {
         let step = 0;
-        while (!this.isSorted(array) && step < HARDCODED_ITERATION_LIMIT) {
+        while (!this.isSorted(array)) {
             this.shuffle(array);
             step++;
         }

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { KatexModule } from 'ng-katex';
 
 import { AppComponent } from './app.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
@@ -26,7 +25,6 @@ import { BarStylePipe } from './graph-color/bar-style.pipe';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    KatexModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

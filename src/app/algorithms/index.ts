@@ -10,6 +10,8 @@ import { CombSort } from './CombSort';
 import { GnomeSort } from './GnomeSort';
 import { BitonicSort } from './BitonicSort';
 import { BogoSort } from './BogoSort';
+import { LessBogoSort } from './LessBogoSort';
+import { LeastBogoSort } from './LeastBogoSort';
 
 export default [
     new BubbleSort,
@@ -23,5 +25,7 @@ export default [
     new QuickSort,
     new RadixSort,
     new BitonicSort,
-    new BogoSort
+    new BogoSort,
+    new LessBogoSort,
+    new LeastBogoSort
 ];

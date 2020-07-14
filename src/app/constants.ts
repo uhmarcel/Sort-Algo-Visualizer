@@ -13,3 +13,4 @@ export const ARRAY_INIT_MAX_SIZE = 160;
 export const PLAYBACK_MAX_INTERVAL = 200;
 export const PLAYBACK_MIN_INTERVAL = 1;
 export const MOBILE_VIEW_BREAKPOINT = 786;
+export const PLAYBACK_SIZE_LIMIT = 100000;

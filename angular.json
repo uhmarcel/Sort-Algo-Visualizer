@@ -127,7 +127,8 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/Sort-Algo-Visualizer/"
+            "baseHref": "/",
+            "cname": "sorting.marcelriera.com",
           }
         }
       }
